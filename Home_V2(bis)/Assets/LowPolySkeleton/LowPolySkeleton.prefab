@@ -1518,6 +1518,7 @@ GameObject:
   - component: {fileID: 8344818362514234913}
   - component: {fileID: 7622868002014895331}
   - component: {fileID: 8263539126597968363}
+  - component: {fileID: 7717353334067281713}
   m_Layer: 0
   m_Name: LowPolySkeleton
   m_TagString: Enemy
@@ -1628,6 +1629,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7717353334067281713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8172442304542317006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03382035ce829b044bfe83e8fb30ef0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCastSize: {x: 1, y: 1.29, z: 1}
+  boxCastOffset: {x: 0, y: 0.63, z: -1}
+  boxCastCenter: {x: 0, y: 0, z: 1}
+  boxCastDistance: 1
+  enemyCollision: 0
 --- !u!1 &8569649574974592577
 GameObject:
   m_ObjectHideFlags: 0
