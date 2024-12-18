@@ -9,13 +9,11 @@ public class PlayerController : MonoBehaviour
     private float gravityValue = -9.81f;
     private float timeSinceFirstClick = 0f;
     private float attackComboDelay = 0.5f;
-
+    public float PlayerHealth;
     private int isWalkingHash;
     private int isRunningHash;
     private int is1stAttackHash;
     private int is2ndAttackHash;
-
-    private int damageAmount = 10;
     private Damage damageScript;
 
     private void Start()
@@ -86,54 +84,44 @@ public class PlayerController : MonoBehaviour
     }
 
     private void HandleAttack()
+{
+    bool isLeftClickPressed = Input.GetMouseButtonDown(0); // Detect mouse click
+    bool is1stAttack = animator.GetBool(is1stAttackHash);
+    bool is2ndAttack = animator.GetBool(is2ndAttackHash);
+
+    if (isLeftClickPressed)
     {
-        bool isLeftClickPressed = Input.GetMouseButtonDown(0); // Detect mouse click
-        bool is1stAttack = animator.GetBool(is1stAttackHash);
-        bool is2ndAttack = animator.GetBool(is2ndAttackHash);
-
-        if (isLeftClickPressed)
+        if (!is1stAttack && damageScript.enemyCollision)
         {
-            if (!is1stAttack)
-            {
-                // Trigger first attack
-                animator.SetBool(is1stAttackHash, true);
-                timeSinceFirstClick = 0f;
-                ApplyDamageToEnemies();
-                Debug.LogWarning("coucouuuuu");
-                
-            }
-            else if (is1stAttack && timeSinceFirstClick < attackComboDelay && !is2ndAttack)
-            {
-                // Trigger second attack in combo
-                animator.SetBool(is2ndAttackHash, true);
-            }
+            // Trigger first attack
+            animator.SetBool(is1stAttackHash, true);
+            timeSinceFirstClick = 0f;
+
+            //Trigger damage
+            damageScript.TriggerDamage();
+
         }
-
-        // Track combo timing
-        if (is1stAttack)
+        else if (is1stAttack && timeSinceFirstClick < attackComboDelay && !is2ndAttack)
         {
-            timeSinceFirstClick += Time.deltaTime;
-            if (timeSinceFirstClick >= attackComboDelay)
-            {
-                // Reset combo if time exceeds delay
-                animator.SetBool(is1stAttackHash, false);
-                animator.SetBool(is2ndAttackHash, false);
-            }
+            // Trigger second attack in combo
+            animator.SetBool(is2ndAttackHash, true);
+
+            // Trigger damage
+            damageScript.TriggerDamage();
         }
     }
 
-    private void ApplyDamageToEnemies()
-   {
-        if (damageScript != null)
+    // Track combo timing
+    if (is1stAttack)
+    {
+        timeSinceFirstClick += Time.deltaTime;
+        if (timeSinceFirstClick >= attackComboDelay)
         {
-            // Call the ApplyDamageToEnemies method from the Damage script
-            damageScript.ApplyDamage(gameObject);
-            Debug.LogWarning("cc",gameObject);
-        }
-        else
-        {
-            Debug.LogWarning("Damage script not found or not attached.");
+            // Reset combo if time exceeds delay
+            animator.SetBool(is1stAttackHash, false);
+            animator.SetBool(is2ndAttackHash, false);
         }
     }
+}
 
 }

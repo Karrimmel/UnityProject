@@ -35,6 +35,8 @@ public class EnnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+
+        handleAttack();
         if(!isDead){
             if (Target != null)
             {
@@ -48,6 +50,11 @@ public class EnnemyAI : MonoBehaviour
         }
         
 
+    }
+
+    public void handleAttack()
+    {
+        
     }
 
     public void TakeDamage(int damage)

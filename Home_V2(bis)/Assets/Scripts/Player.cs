@@ -6,7 +6,8 @@ public class Player : MonoBehaviour
 {
 
     public bool isDead = false;
-    public float playerHealth = 10;
+    public float playerHealth;
+    public int playerAttackDamage;
     CapsuleCollider playerCollider;
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K)){
-            ApplyDammage(10);
+            ApplyDammage(playerAttackDamage);
         }
         if (isDead == true){
             Destroy(gameObject);
