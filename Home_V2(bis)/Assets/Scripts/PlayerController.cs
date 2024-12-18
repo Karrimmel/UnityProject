@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private int isRunningHash;
     private int is1stAttackHash;
     private int is2ndAttackHash;
-    private Damage damageScript;
+    public Damage damageScript;
 
     private void Start()
     {
@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
+        
         HandleMovement();
         HandleAttack();
     }
@@ -91,23 +93,22 @@ public class PlayerController : MonoBehaviour
 
     if (isLeftClickPressed)
     {
-        if (!is1stAttack && damageScript.enemyCollision)
+        Debug.Log(timeSinceFirstClick);
+        if (!is1stAttack)
         {
             // Trigger first attack
             animator.SetBool(is1stAttackHash, true);
             timeSinceFirstClick = 0f;
-
-            //Trigger damage
-            damageScript.TriggerDamage();
-
+            damageScript.TriggerDamageOnEnemy();
+            
         }
         else if (is1stAttack && timeSinceFirstClick < attackComboDelay && !is2ndAttack)
         {
             // Trigger second attack in combo
-            animator.SetBool(is2ndAttackHash, true);
-
-            // Trigger damage
-            damageScript.TriggerDamage();
+                animator.SetBool(is2ndAttackHash, true);
+            if( damageScript.enemyCollision){
+                damageScript.TriggerDamageOnEnemy();
+            }
         }
     }
 

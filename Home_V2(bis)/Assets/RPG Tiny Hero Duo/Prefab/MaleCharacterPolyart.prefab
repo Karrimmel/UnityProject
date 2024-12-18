@@ -1721,6 +1721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHealth: 0
+  damageScript: {fileID: 0}
 --- !u!143 &6713289472769298486
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1778,6 +1779,11 @@ MonoBehaviour:
   boxCastCenter: {x: 0, y: -0.24, z: -1}
   boxCastDistance: 1
   enemyCollision: 0
+  playerCollision: 0
+  playerScript: {fileID: 0}
+  enemyScript: {fileID: 0}
+  detectedEnemy: {fileID: 0}
+  detectedPlayer: {fileID: 0}
 --- !u!195 &3765499772475872408
 NavMeshAgent:
   m_ObjectHideFlags: 0
